@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ipAddress = "192.168.5.69";
+        ipAddress = "10.168.2.101";
         initNet();
         initView();
     }
 
     private void initNet() {
         tcpClient = TCPClient.build()
-                .server(ipAddress, 8888)
+                .server(ipAddress, 1234)
                 .breath("heart".getBytes(), 6 * 1000)
                 .connTimeout(10 * 1000);
     }
@@ -98,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
             MyRecParse myRecParse = new MyRecParse();
             List<RecData> dataList = myRecParse.parse();
             if (dataList.size() > 0) {
-                for (RecData recData :
-                        dataList) {
+                for (RecData recData : dataList) {
                     ChatMess chatMess = new ChatMess();
                     chatMess.setType(1);
                     chatMess.setMesg(new String(recData.getData()));
